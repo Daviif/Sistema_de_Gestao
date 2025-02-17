@@ -7,11 +7,11 @@ public class Endereco{
         this.cidade = cidade;
     }
 
-    public String getRua{
+    public String getRua(){
         return rua;
     }
 
-    public String getCidade{
+    public String getCidade(){
         return cidade;
     }
 
