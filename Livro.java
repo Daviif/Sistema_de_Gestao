@@ -23,7 +23,7 @@ public class Livro {
     }
 
     public void setDisponivel(boolean disponivel){
-        this.dispoivel = disponivel;
+        this.disponivel = disponivel;
     }
 
     public String verificar(boolean disponivel){

@@ -1,7 +1,8 @@
 import java.util.Scanner;
-
+import java.util.ArrayList;
+import java.util.List;
 public class Biblioteca {
-    private List<Livro> livros;
+    private List <Livro> livros;
 
     public Biblioteca(){
         this.livros = new ArrayList<>();
@@ -11,7 +12,7 @@ public class Biblioteca {
     public void CadastrarLivro(Livro NovoLivro){
         if (NovoLivro != null){
             livros.add(NovoLivro);
-            System.out.println("Livro '"+ livro.getTitulo()+"'adicionado!");
+            System.out.println("Livro '"+ NovoLivro.getTitulo()+"'adicionado!");
         }
     }
 
@@ -21,7 +22,7 @@ public class Biblioteca {
         if (livros.contains(LivroDesejado) && LivroDesejado.getDisponivel()){
             System.out.println("Você deseja reservar o livro " + LivroDesejado + "?");
 
-            if (escolha == "Sim" || Escolha == "sim"){
+            if (escolha == "Sim" || escolha == "sim"){
                 LivroDesejado.setDisponivel(false);
                 System.out.println("Livro reservado com sucesso.");
 

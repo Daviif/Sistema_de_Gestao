@@ -3,8 +3,9 @@ public class Funcionario extends Pessoa{
     private double salario;
 
 
-    public Funcionario(String nome, String rua, String cidade){
+    public Funcionario(String nome, String rua, String cidade, String cargo){
         super(nome, rua, cidade);
+        this.cargo = cargo;
     }
 
     public String getCargo(){
