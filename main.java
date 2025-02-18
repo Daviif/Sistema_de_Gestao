@@ -47,7 +47,7 @@ public class main{
                     }
                     break;
                 case 2:
-
+                    Livro novoLivro = new Livro
                 default:
                     break;
             }

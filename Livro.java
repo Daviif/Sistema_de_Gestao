@@ -1,4 +1,6 @@
+import java.util.Scanner;
 public class Livro {
+    Scanner ler = new Scanner(System.in);
 
     private String titulo;
     private String autor;
@@ -40,4 +42,15 @@ public class Livro {
         return "Livro: " + this.getTitulo() + ", Autor: " + this.getAutor() + this.getDisponivel();
     }
 
+    public Livro criarLivro(){
+        System.out.println("Informe o titulo do livro");
+        String Titulo = ler.nextLine();
+        System.out.println("Informe o autor");
+        String Autor = ler.nextLine();
+        boolean Disponibilidade = true;
+
+        Livro novoLivro = new Livro(titulo, autor, disponivel);
+
+        return novoLivro;
+    }
 }

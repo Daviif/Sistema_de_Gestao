@@ -8,7 +8,7 @@ public class Biblioteca {
         this.livros = new ArrayList<>();
     }
     
-    public void CadastrarLivro(Livro NovoLivro){
+    public void AdicionarLivro(Livro NovoLivro){
         if (NovoLivro != null){
             livros.add(NovoLivro);
             System.out.println("Livro '"+ NovoLivro.getTitulo()+"'adicionado!");
