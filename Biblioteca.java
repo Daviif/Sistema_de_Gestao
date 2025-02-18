@@ -1,4 +1,4 @@
-import java.util.Scanner;
+
 import java.util.ArrayList;
 import java.util.List;
 public class Biblioteca {
@@ -8,7 +8,6 @@ public class Biblioteca {
         this.livros = new ArrayList<>();
     }
     
-
     public void CadastrarLivro(Livro NovoLivro){
         if (NovoLivro != null){
             livros.add(NovoLivro);

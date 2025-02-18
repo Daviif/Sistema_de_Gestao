@@ -1,8 +1,17 @@
 import java.util.Scanner;
-
+import java.util.List;
+import java.util.ArrayList;
 public class Cadastro {
-    public static Usuario CadastrarUsuario(){
-        Scanner ler = new Scanner(System.in);
+    private List<Usuario> usuarios;
+    private List<Funcionario> funcionarios;
+
+    public Cadastro(){
+        this.usuarios = new ArrayList<>();
+        this.funcionarios = new ArrayList<>();
+    }
+
+    Scanner ler = new Scanner(System.in);
+    public Usuario CadastrarUsuario(){
 
         System.out.println("Informe o nome: ");
         String nome = ler.nextLine();
@@ -11,12 +20,14 @@ public class Cadastro {
         System.out.println("Informe a cidade: ");
         String cidade = ler.nextLine();
 
-        return new Usuario(nome, rua, cidade);
+        Usuario novoUsuario = new Usuario(nome, rua, cidade);
+        usuarios.add(novoUsuario);
+
+        return novoUsuario;
     }
 
-    public static Funcionario CadastrarFuncionario(){
-        Scanner ler = new Scanner(System.in);
-
+    public Funcionario CadastrarFuncionario(){
+        
         System.out.println("Informe o nome: ");
         String nome = ler.nextLine();
         System.out.println("Informe a rua: ");
@@ -26,6 +37,34 @@ public class Cadastro {
         System.out.println("Informe o cargo: ");
         String cargo = ler.nextLine();
 
-        return new Funcionario(nome, rua, cidade, cargo);
+        Funcionario novoFuncionario = new Funcionario(nome, rua, cidade, cargo);
+        funcionarios.add(novoFuncionario);
+
+        return novoFuncionario;
+}
+    public void Exibir(){
+        System.out.println("Deseja exibir a lista de Funcionarios ou Usuarios?");
+        String show = ler.nextLine();
+
+        if (show.equals("Funcionarios")){
+            if (funcionarios.isEmpty()) {
+                System.out.println("Nenhum funcionario cadastrado!");
+            }
+            else{
+                for (Funcionario funcionario : funcionarios) {
+                    System.out.println(funcionario);
+                }
+            }
+        }
+        else if (show.equals("Usuarios")){
+            if (usuarios.isEmpty()) {
+                System.out.println("Nenhum usuario cadastrado!");
+            }
+            else{
+                for (Usuario usuario : usuarios) {
+                    System.out.println(usuario);
+                }
+            }
+        }
     }
 }

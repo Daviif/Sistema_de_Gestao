@@ -16,6 +16,7 @@ public class main{
         System.out.println("- - - Seja Bem-Vindo ao Sistema de Gestão de Bibliotecas - - -");
         System.out.println("O que você deseja fazer agora?");
 
+        Cadastro cadastro = new Cadastro();
         boolean exit = false;
         int option; 
         char option_user;
@@ -30,15 +31,15 @@ public class main{
                     System.out.println("Deseja cadastrar um funcionário?(Y/N)");
                     option_user = ler.next().charAt(0);
                     if(option_user == 'y' || option_user == 'Y'){
-                        Funcionario funcionario = Cadastro.CadastrarFuncionario();
-                        System.out.println("Funcionario '" + funcionario.getNome() + "' cadastrado com sucesso!");
+                        Funcionario novoFuncionario = cadastro.CadastrarFuncionario();
+                        System.out.println("Funcionario '" + novoFuncionario.getNome() + "' cadastrado com sucesso!");
                     }
                     else if (option_user == 'n' || option_user == 'N') {
                         System.out.println("Deseja cadastrar um usuario novo?(Y/N)");
                         option_user = ler.next().charAt(0);
                         if (option_user == 'y' || option_user == 'Y') {
-                            Usuario usuario = Cadastro.CadastrarUsuario();
-                            System.out.println("Usuario '" + usuario.getNome() + "' usuario cadastrado com sucesso"); 
+                            Usuario novoUsuario = cadastro.CadastrarUsuario();
+                            System.out.println("Usuario '" + novoUsuario.getNome() + "' usuario cadastrado com sucesso"); 
                         }
                         else{
                             System.out.println("Voltando ao menu...");
@@ -53,5 +54,8 @@ public class main{
 
         }while(exit != true);
 
+        ler.close();
     }
+
+   
 }
