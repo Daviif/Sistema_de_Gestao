@@ -26,7 +26,7 @@ public class main{
         char option_user;
 
         do{
-            System.out.println("1 - Cadastrar Usuario\n2 - Cadastrar Livro\n3 - Reservar Livro");
+            System.out.println("1 - Cadastrar Pessoa\n2 - Cadastrar Livro\n3 - Reservar Livro\n4 - Devolver Livro");
             option = ler.nextInt();
 
             switch (option) {
@@ -58,10 +58,27 @@ public class main{
                     break;
                 case 3:
                     ler.nextLine();
-                    System.out.println("Informe os dados do Livro desejado: ");
+                    System.out.println("Informe o titulo do Livro desejado: ");
                     String TituloLivro = ler.nextLine();
-                    biblioteca.ReservarLivro(TituloLivro);
-                    
+
+                    try {
+                        biblioteca.ReservarLivro(TituloLivro);
+                    } catch (LivroIndisponivelException e) {
+                        System.out.println("Erro: " + e.getMessage());
+                    } catch (LivroNaoEncontradoException e){
+                        System.out.println("Erro: " + e.getMessage());
+                    }
+                    break;
+                case 4:
+                    ler.nextLine();
+                    System.out.println("Informe o titulo do livro para a devolução: ");
+                    String TituloLivroD = ler.nextLine();
+
+                    try {
+                        biblioteca.DevolverLivro(TituloLivroD);
+                    } catch (Exception e) {
+                       System.out.println("Error: " + e.getMessage());
+                    }
                     break;
             }
 

@@ -25,7 +25,7 @@ public class Biblioteca {
     public String escolha;
     public int prazoEnt;
 
-    public void ReservarLivro(String tituloLivro){
+    public void ReservarLivro(String tituloLivro) throws LivroIndisponivelException, LivroNaoEncontradoException{
         Livro LivroDesejado = null;
 
         for (Livro livro : livros) {
@@ -36,9 +36,9 @@ public class Biblioteca {
         }
 
         if (LivroDesejado == null) {
-            System.out.println("Livro não encontrado!");
-            return;
+           throw new LivroNaoEncontradoException("Livro não encontrado!\nTente novamente.");
         }
+        
         System.out.println("Informe quem deseja reservar(Funcionario/Usuario)");
         String choiceUser = ler.nextLine().trim();
         Funcionario showF = null;
@@ -96,12 +96,12 @@ public class Biblioteca {
             }
         }
         else{
-            System.out.println("Livro não disponível! Tente outro!");
+            throw new LivroIndisponivelException("O livro" + LivroDesejado.getTitulo() + "não disponível para reserva!");
         }
         
     }
 
-    public void DevolverLivro(String tituloLivro){
+    public void DevolverLivro(String tituloLivro) throws LivroNaoEncontradoException, PrazoAtrasadoException {
         Livro LivroDesejado = null;
 
         for (Livro livro : livros) {
@@ -111,8 +111,13 @@ public class Biblioteca {
             }
         }
 
+        if (LivroDesejado == null) {
+            throw new LivroNaoEncontradoException("Livro não encontrado!\nTente novamente.");
+         }
+
         if (livros.contains(LivroDesejado) && !LivroDesejado.getDisponivel()) {
             System.out.println("Livro devolvido com sucesso!");
+            LivroDesejado.setDisponivel(true);
         }
         else{
             System.out.println("Livro não encontrado!");

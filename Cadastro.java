@@ -32,14 +32,15 @@ public class Cadastro {
         
         System.out.println("Informe o nome: ");
         String nome = ler.nextLine();
+        System.out.println("Informe o cargo: ");
+        String cargo = ler.nextLine();
         System.out.println("Informe a rua: ");
         String rua = ler.nextLine();
         System.out.println("Informe a cidade: ");
         String cidade = ler.nextLine();
-        System.out.println("Informe o cargo: ");
-        String cargo = ler.nextLine();
+        
 
-        Funcionario novoFuncionario = new Funcionario(nome, rua, cidade, cargo);
+        Funcionario novoFuncionario = new Funcionario(nome, cargo, rua, cidade);
         funcionarios.add(novoFuncionario);
 
         return novoFuncionario;
