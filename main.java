@@ -12,7 +12,7 @@ public class main{
         DateTimeFormatter formatterHora = DateTimeFormatter.ofPattern("HH:mm:ss");
         String horaFormatada = formatterHora.format(atual);
         
-        System.out.println("Data: " + dataFormatada + "\nHora: " + horaFormatada);
+        System.out.println("- - - Data: " + dataFormatada + " - - -\n- - - Hora: " + horaFormatada + " - - -");
 
         System.out.println("- - - Seja Bem-Vindo ao Sistema de Gestão de Bibliotecas - - -");
         System.out.println("O que você deseja fazer agora?");
@@ -26,28 +26,24 @@ public class main{
         char option_user;
 
         do{
-            System.out.println("1 - Cadastrar Pessoa\n2 - Cadastrar Livro\n3 - Reservar Livro\n4 - Devolver Livro");
+            System.out.println("1 - Cadastrar Pessoa\n2 - Cadastrar Livro\n3 - Reservar Livro\n4 - Devolver Livro\n5 - Exibir Pessoas\n6 - Exibir Biblioteca\n7 - Sair");
             option = ler.nextInt();
 
             switch (option) {
 
                 case 1:
-                    System.out.println("Deseja cadastrar um funcionário?(Y/N)");
+                    System.out.println("Deseja cadastrar um Funcionário ou um Usuario?(F/U)");
                     option_user = ler.next().charAt(0);
-                    if(option_user == 'y' || option_user == 'Y'){
+                    if(option_user == 'f' || option_user == 'F'){
                         Funcionario novoFuncionario = cadastro.CadastrarFuncionario();
                         System.out.println("Funcionario '" + novoFuncionario.getNome() + "' cadastrado com sucesso!");
                     }
-                    else if (option_user == 'n' || option_user == 'N') {
-                        System.out.println("Deseja cadastrar um usuario novo?(Y/N)");
-                        option_user = ler.next().charAt(0);
-                        if (option_user == 'y' || option_user == 'Y') {
-                            Usuario novoUsuario = cadastro.CadastrarUsuario();
-                            System.out.println("Usuario '" + novoUsuario.getNome() + "' usuario cadastrado com sucesso"); 
-                        }
-                        else{
-                            System.out.println("Voltando ao menu...");
-                        }
+                    else if (option_user == 'u' || option_user == 'U') {
+                        Usuario novoUsuario = cadastro.CadastrarUsuario();
+                        System.out.println("Usuario '" + novoUsuario.getNome() + "' usuario cadastrado com sucesso"); 
+                    }
+                    else{
+                        System.out.println("Voltando ao menu...");
                     }
                     break;
                 case 2:
@@ -79,6 +75,15 @@ public class main{
                     } catch (Exception e) {
                        System.out.println("Error: " + e.getMessage());
                     }
+                    break;
+                case 5:
+                        cadastro.Exibir();
+                    break;
+                case 6:
+                    biblioteca.ExibirLivros();
+                    break;
+                case 7:
+                    exit = true;
                     break;
             }
 

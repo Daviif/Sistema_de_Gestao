@@ -76,20 +76,23 @@ public class Biblioteca {
                 return;
             }
         }
-        if (choiceUser.equalsIgnoreCase("Funcionarios")) {
-            prazoEnt = 14;
-        }
-        else if (choiceUser.equalsIgnoreCase("Usuarios")) {
-            prazoEnt = 7;
-        }
-
+        
         if (LivroDesejado != null && LivroDesejado.getDisponivel()){
-            System.out.println("Você deseja reservar o livro " + LivroDesejado + "?");
+            System.out.println("Você deseja reservar o livro " + LivroDesejado);
             escolha = ler.nextLine().trim();
 
             if (escolha.equalsIgnoreCase("Sim")){
                 LivroDesejado.setDisponivel(false);
-                System.out.println(showF.getNome() + " reserva " + LivroDesejado.getTitulo() + " por " + prazoEnt + " dias.");
+
+                if (choiceUser.equalsIgnoreCase("Funcionarios")) {
+                    prazoEnt = 14;
+                    System.out.println(showF.getNome() + " reserva " + LivroDesejado.getTitulo() + " por " + prazoEnt + " dias.");
+                }
+                else if (choiceUser.equalsIgnoreCase("Usuarios")) {
+                    prazoEnt = 7;
+                    System.out.println(showU.getNome() + " reserva " + LivroDesejado.getTitulo() + " por " + prazoEnt + " dias.");
+                }
+                
             }
             else{
                 System.out.println("Reserva cancelada!");
@@ -122,5 +125,65 @@ public class Biblioteca {
         else{
             System.out.println("Livro não encontrado!");
         }
+    }
+
+    public void ExibirBiblioteca(){
+        
+        if (livros.isEmpty()) {
+            System.out.println("Nenhum livro na biblioteca!");
+        }
+        else{                
+            for (Livro livro : livros) {
+              System.out.println(livro);
+            }
+        }
+        
+    }
+
+    
+    public void ExibirLivros(){
+        System.out.println("Deseja ver os livros: ");
+        System.out.println("1 - Disponiveis\n2 - Indisponveis\n3 - Todos");
+        int filter = ler.nextInt();
+
+        if (livros.isEmpty()) {
+            System.out.println("Ainda não há livros no momento.");
+        }
+
+        switch (filter) {
+            case 1:
+                boolean searchAvailable = false;
+                for (Livro livro : livros) {
+                    if (livro.getDisponivel()) {
+                        System.out.println(livro);
+                        searchAvailable = true;
+                    }
+                }
+                if (!searchAvailable) {
+                    System.out.println("Não há livros que estejam disponiveis.");
+                }
+                break;
+            case 2:
+                boolean searchUnavailable = false;
+                for (Livro livro : livros) {
+                    if (!livro.getDisponivel()) {
+                        System.out.println(livro);
+                        searchUnavailable = true;
+                    }
+                }
+                if (!searchUnavailable) {
+                    System.out.println("Todos os livros estão disponiveis!");
+                }
+                break;
+            case 3:
+                for (Livro livro : livros) {
+                    System.out.println(livro);
+                }
+            break;
+            default:
+                System.out.println("Option invalid");
+                break;
+        }
+
     }
 }

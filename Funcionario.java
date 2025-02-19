@@ -1,6 +1,5 @@
 public class Funcionario extends Pessoa{
     private String cargo;
-    private double salario;
 
 
     public Funcionario(String nome, String cargo, String rua, String cidade){
@@ -12,12 +11,13 @@ public class Funcionario extends Pessoa{
         return cargo;
     }
 
-    public double getSalario(){
-        return salario;
-    }
-
-
     public void definirPrazoReserva(){
 
+    }
+
+    @Override
+    public String toString(){
+        return getNome() + "(Cargo: " + getCargo() + ", " + getEndereco() + ")";
+                
     }
 }

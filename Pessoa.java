@@ -19,7 +19,7 @@ public class Pessoa{
 
     @Override
     public String toString(){
-        return "Nome: " + this.getNome() + "\nEndereco: " + this.getEndereco();
+        return this.getNome() + "Endereco: " + this.getEndereco();
     }
 
 }
