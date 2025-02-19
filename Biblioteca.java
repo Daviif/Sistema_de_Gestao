@@ -39,12 +39,12 @@ public class Biblioteca {
            throw new LivroNaoEncontradoException("Livro não encontrado!\nTente novamente.");
         }
         
-        System.out.println("Informe quem deseja reservar(Funcionario/Usuario)");
+        System.out.println("Informe quem deseja reservar Funcionario/Usuario(F/U)");
         String choiceUser = ler.nextLine().trim();
         Funcionario showF = null;
         Usuario showU = null;
 
-        if (choiceUser.equalsIgnoreCase("Funcionario")) {
+        if (choiceUser.equalsIgnoreCase("F")) {
             System.out.println("Informe o funcionario:");
             String nameF = ler.nextLine().trim();
 
@@ -54,13 +54,12 @@ public class Biblioteca {
                     break;
                 }
             }
-
             if (showF == null) {
                 System.out.println("Funcionário não encontrado.");
                 return;
             }
         }
-        else if (choiceUser.equalsIgnoreCase("Usuario")){
+        else if (choiceUser.equalsIgnoreCase("U")){
             System.out.println("Informe o usuario:");
             String nameU = ler.nextLine().trim();
 
@@ -70,11 +69,14 @@ public class Biblioteca {
                     break;
                 }
             }
-
             if (showU == null) {
                 System.out.println("Usuario não encontrado.");
                 return;
             }
+        }
+        else{
+            System.out.println("Comando invalido. Tente novamente\n");
+            return;
         }
         
         if (LivroDesejado != null && LivroDesejado.getDisponivel()){
@@ -117,13 +119,49 @@ public class Biblioteca {
         if (LivroDesejado == null) {
             throw new LivroNaoEncontradoException("Livro não encontrado!\nTente novamente.");
          }
-
+        
+         System.out.println("Informe quem deseja devolver - Funcionario/Usuario(F/U)");
+         String choiceUser = ler.nextLine().trim();
+         Funcionario showF = null;
+         Usuario showU = null;
+ 
+         if (choiceUser.equalsIgnoreCase("F")) {
+             System.out.println("Informe o funcionario:");
+             String nameF = ler.nextLine().trim();
+ 
+             for (Funcionario funcionario : funcionarios) {
+                 if (funcionario.getNome().equalsIgnoreCase(nameF)) {
+                     showF = funcionario;
+                     break;
+                 }
+             }
+             if (showF == null) {
+                 System.out.println("Funcionário não encontrado.");
+                 return;
+             }
+         }
+         else if (choiceUser.equalsIgnoreCase("U")){
+             System.out.println("Informe o usuario:");
+             String nameU = ler.nextLine().trim();
+ 
+             for (Usuario usuario : usuarios) {
+                 if (usuario.getNome().equalsIgnoreCase(nameU)) {
+                     showU = usuario;
+                     break;
+                 }
+             }
+             if (showU == null) {
+                 System.out.println("Usuario não encontrado.");
+                 return;
+             }
+         }
+         else{
+             System.out.println("Comando invalido. Tente novamente\n");
+             return;
+         }
         if (livros.contains(LivroDesejado) && !LivroDesejado.getDisponivel()) {
             System.out.println("Livro devolvido com sucesso!");
             LivroDesejado.setDisponivel(true);
-        }
-        else{
-            System.out.println("Livro não encontrado!");
         }
     }
 

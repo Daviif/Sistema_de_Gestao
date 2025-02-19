@@ -46,10 +46,10 @@ public class Cadastro {
         return novoFuncionario;
 }
     public void Exibir(){
-        System.out.println("Deseja exibir a lista de Funcionarios ou Usuarios?");
+        System.out.println("Deseja exibir a lista de Funcionarios ou Usuarios?(F/U)");
         String show = ler.nextLine();
 
-        if (show.equals("Funcionarios")){
+        if (show.equals("F")){
             if (funcionarios.isEmpty()) {
                 System.out.println("Nenhum funcionario cadastrado!");
             }
