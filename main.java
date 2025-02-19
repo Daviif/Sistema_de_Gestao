@@ -1,6 +1,7 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
 public class main{
     public static void main(String[] args) {
         Scanner ler = new Scanner(System.in);
@@ -17,12 +18,15 @@ public class main{
         System.out.println("O que você deseja fazer agora?");
 
         Cadastro cadastro = new Cadastro();
+        
+        Biblioteca biblioteca = new Biblioteca(cadastro);
+
         boolean exit = false;
         int option; 
         char option_user;
 
         do{
-            System.out.println("1 - Cadastrar Usuario\n2 - Cadastrar Livro");
+            System.out.println("1 - Cadastrar Usuario\n2 - Cadastrar Livro\n3 - Reservar Livro");
             option = ler.nextInt();
 
             switch (option) {
@@ -47,8 +51,17 @@ public class main{
                     }
                     break;
                 case 2:
-                    Livro novoLivro = new Livro
-                default:
+                    Livro novoLivro = cadastro.criarLivro();
+                    System.out.println("Livro " + novoLivro.getTitulo() + " criado com sucesso!");
+                    biblioteca.AdicionarLivro(novoLivro);
+                    System.out.println("Livro adicionado na biblioteca!");
+                    break;
+                case 3:
+                    ler.nextLine();
+                    System.out.println("Informe os dados do Livro desejado: ");
+                    String TituloLivro = ler.nextLine();
+                    biblioteca.ReservarLivro(TituloLivro);
+                    
                     break;
             }
 

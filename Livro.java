@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 public class Livro {
     Scanner ler = new Scanner(System.in);
@@ -39,18 +40,8 @@ public class Livro {
    
     @Override
     public String toString(){
-        return "Livro: " + this.getTitulo() + ", Autor: " + this.getAutor() + this.getDisponivel();
+        return "Livro: " + this.getTitulo() + ", Autor: " + this.getAutor() + ", Disponivel: " + verificar(getDisponivel());
     }
 
-    public Livro criarLivro(){
-        System.out.println("Informe o titulo do livro");
-        String Titulo = ler.nextLine();
-        System.out.println("Informe o autor");
-        String Autor = ler.nextLine();
-        boolean Disponibilidade = true;
-
-        Livro novoLivro = new Livro(titulo, autor, disponivel);
-
-        return novoLivro;
-    }
+    
 }

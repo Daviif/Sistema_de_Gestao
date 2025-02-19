@@ -1,9 +1,11 @@
+
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+
 public class Cadastro {
-    private List<Usuario> usuarios;
-    private List<Funcionario> funcionarios;
+    List<Usuario> usuarios;
+    List<Funcionario> funcionarios;
 
     public Cadastro(){
         this.usuarios = new ArrayList<>();
@@ -66,5 +68,16 @@ public class Cadastro {
                 }
             }
         }
+    }
+    public Livro criarLivro(){
+        System.out.println("Informe o titulo do livro");
+        String Titulo = ler.nextLine();
+        System.out.println("Informe o autor");
+        String Autor = ler.nextLine();
+        boolean Disponibilidade = true;
+
+        Livro novoLivro = new Livro(Titulo, Autor, Disponibilidade);
+
+        return novoLivro;
     }
 }
