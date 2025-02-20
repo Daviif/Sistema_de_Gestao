@@ -2,6 +2,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import Exceptions.LivroDisponivelException;
+import Exceptions.LivroIndisponivelException;
+import Exceptions.LivroNaoEncontradoException;
+import Exceptions.PrazoAtrasadoException;
+
 public class main{
     public static void main(String[] args) {
         Scanner ler = new Scanner(System.in);

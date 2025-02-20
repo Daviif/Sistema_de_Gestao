@@ -1,5 +1,11 @@
 
 import java.util.Scanner;
+
+import Exceptions.LivroDisponivelException;
+import Exceptions.LivroIndisponivelException;
+import Exceptions.LivroNaoEncontradoException;
+import Exceptions.PrazoAtrasadoException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -190,8 +196,6 @@ public class Biblioteca {
         }
         
     }
-
-    
     public void ExibirLivros(){
         System.out.println("Deseja ver os livros: ");
         System.out.println("1 - Disponiveis\n2 - Indisponveis\n3 - Todos");
@@ -235,6 +239,9 @@ public class Biblioteca {
                 System.out.println("Option invalid");
                 break;
         }
+    }
 
+    public void GestaoPrazo(){
+        
     }
 }
