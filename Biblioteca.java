@@ -23,7 +23,7 @@ public class Biblioteca {
     }
 
     public String escolha;
-    public int prazoEnt;
+    
 
     public void ReservarLivro(String tituloLivro) throws LivroIndisponivelException, LivroNaoEncontradoException{
         Livro LivroDesejado = null;
@@ -40,11 +40,12 @@ public class Biblioteca {
         }
         
         System.out.println("Informe quem deseja reservar Funcionario/Usuario(F/U)");
-        String choiceUser = ler.nextLine().trim();
+        char choiceUser = ler.next().charAt(0);
+        ler.nextLine();
         Funcionario showF = null;
         Usuario showU = null;
 
-        if (choiceUser.equalsIgnoreCase("F")) {
+        if (Character.toUpperCase(choiceUser) == 'F') {
             System.out.println("Informe o funcionario:");
             String nameF = ler.nextLine().trim();
 
@@ -59,7 +60,7 @@ public class Biblioteca {
                 return;
             }
         }
-        else if (choiceUser.equalsIgnoreCase("U")){
+        else if (Character.toUpperCase(choiceUser) == 'U'){
             System.out.println("Informe o usuario:");
             String nameU = ler.nextLine().trim();
 
@@ -86,13 +87,13 @@ public class Biblioteca {
             if (escolha.equalsIgnoreCase("Sim")){
                 LivroDesejado.setDisponivel(false);
 
-                if (choiceUser.equalsIgnoreCase("Funcionarios")) {
-                    prazoEnt = 14;
-                    System.out.println(showF.getNome() + " reserva " + LivroDesejado.getTitulo() + " por " + prazoEnt + " dias.");
+                if (showF != null) {
+                    int prazoEntF = 14;
+                    System.out.println(showF.getNome() + " reserva " + LivroDesejado.getTitulo() + " por " + prazoEntF + " dias.");
                 }
-                else if (choiceUser.equalsIgnoreCase("Usuarios")) {
-                    prazoEnt = 7;
-                    System.out.println(showU.getNome() + " reserva " + LivroDesejado.getTitulo() + " por " + prazoEnt + " dias.");
+                else if (showU != null) {
+                    int prazoEntU = 7;
+                    System.out.println(showU.getNome() + " reserva " + LivroDesejado.getTitulo() + " por " + prazoEntU + " dias.");
                 }
                 
             }
@@ -106,7 +107,7 @@ public class Biblioteca {
         
     }
 
-    public void DevolverLivro(String tituloLivro) throws LivroNaoEncontradoException, PrazoAtrasadoException {
+    public void DevolverLivro(String tituloLivro) throws LivroDisponivelException, LivroNaoEncontradoException, PrazoAtrasadoException {
         Livro LivroDesejado = null;
 
         for (Livro livro : livros) {
@@ -121,11 +122,12 @@ public class Biblioteca {
          }
         
          System.out.println("Informe quem deseja devolver - Funcionario/Usuario(F/U)");
-         String choiceUser = ler.nextLine().trim();
+         char choiceUser = ler.next().charAt(0);
+         ler.nextLine();
          Funcionario showF = null;
          Usuario showU = null;
- 
-         if (choiceUser.equalsIgnoreCase("F")) {
+         
+         if (Character.toUpperCase(choiceUser) == 'F') {
              System.out.println("Informe o funcionario:");
              String nameF = ler.nextLine().trim();
  
@@ -140,7 +142,7 @@ public class Biblioteca {
                  return;
              }
          }
-         else if (choiceUser.equalsIgnoreCase("U")){
+         else if (Character.toUpperCase(choiceUser) == 'U'){
              System.out.println("Informe o usuario:");
              String nameU = ler.nextLine().trim();
  
@@ -159,10 +161,21 @@ public class Biblioteca {
              System.out.println("Comando invalido. Tente novamente\n");
              return;
          }
-        if (livros.contains(LivroDesejado) && !LivroDesejado.getDisponivel()) {
-            System.out.println("Livro devolvido com sucesso!");
+        
+         if (livros.contains(LivroDesejado) && !LivroDesejado.getDisponivel()){
+            if (showF != null) {
+                System.out.println(showF.getNome() + " devolve o " + LivroDesejado.getTitulo() + "!");
             LivroDesejado.setDisponivel(true);
+            }
+            else if(showU != null){
+                System.out.println(showU.getNome() + " devolve o " + LivroDesejado.getTitulo() + "!");
+                LivroDesejado.setDisponivel(true);
+            }
         }
+        else{
+            throw new LivroDisponivelException("Você esta tentando devolver um livro que não foi reservado!");
+        }
+
     }
 
     public void ExibirBiblioteca(){

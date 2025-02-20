@@ -33,11 +33,11 @@ public class main{
                     System.out.println("Deseja cadastrar um Funcionário ou um Usuario?(F/U)");
                     option_user = ler.next().charAt(0);
                     ler.nextLine();
-                    if(option_user == 'F' || option_user == 'f'){
+                    if(Character.toUpperCase(option_user) == 'F'){
                         Funcionario novoFuncionario = cadastro.CadastrarFuncionario();
                         System.out.println("Funcionario '" + novoFuncionario.getNome() + "' cadastrado com sucesso!");
                     }
-                    else if (option_user == 'F' || option_user == 'f'){
+                    else if (Character.toUpperCase(option_user) == 'U'){
                         Usuario novoUsuario = cadastro.CadastrarUsuario();
                         System.out.println("Usuario '" + novoUsuario.getNome() + "' usuario cadastrado com sucesso"); 
                     }
@@ -69,8 +69,12 @@ public class main{
                     String TituloLivroD = ler.nextLine();
                     try {
                         biblioteca.DevolverLivro(TituloLivroD);
-                    } catch (Exception e) {
-                       System.out.println("Error: " + e.getMessage());
+                    } catch (LivroDisponivelException e) {
+                       System.out.println("Error: " + e.getMessage()); 
+                    } catch (LivroNaoEncontradoException e) {
+                        System.out.println("Error: " + e.getMessage()); 
+                    } catch (PrazoAtrasadoException e) {
+                        System.out.println("Error: " + e.getMessage());
                     }
                     break;
                 case 5:
