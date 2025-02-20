@@ -18,28 +18,26 @@ public class main{
         System.out.println("O que você deseja fazer agora?");
 
         Cadastro cadastro = new Cadastro();
-        
         Biblioteca biblioteca = new Biblioteca(cadastro);
 
         boolean exit = false;
         int option; 
-        String option_user;
+        char option_user;
 
         do{
             System.out.println("1 - Cadastrar Pessoa\n2 - Cadastrar Livro\n3 - Reservar Livro\n4 - Devolver Livro\n5 - Exibir Pessoas\n6 - Exibir Biblioteca\n7 - Sair");
             option = ler.nextInt();
 
             switch (option) {
-
                 case 1:
                     System.out.println("Deseja cadastrar um Funcionário ou um Usuario?(F/U)");
-                    option_user = ler.nextLine();
+                    option_user = ler.next().charAt(0);
                     ler.nextLine();
-                    if(option_user.equalsIgnoreCase("F")){
+                    if(option_user == 'F' || option_user == 'f'){
                         Funcionario novoFuncionario = cadastro.CadastrarFuncionario();
                         System.out.println("Funcionario '" + novoFuncionario.getNome() + "' cadastrado com sucesso!");
                     }
-                    else if (option_user.equalsIgnoreCase("U")){
+                    else if (option_user == 'F' || option_user == 'f'){
                         Usuario novoUsuario = cadastro.CadastrarUsuario();
                         System.out.println("Usuario '" + novoUsuario.getNome() + "' usuario cadastrado com sucesso"); 
                     }
@@ -69,7 +67,6 @@ public class main{
                     ler.nextLine();
                     System.out.println("Informe o titulo do livro para a devolução: ");
                     String TituloLivroD = ler.nextLine();
-
                     try {
                         biblioteca.DevolverLivro(TituloLivroD);
                     } catch (Exception e) {
