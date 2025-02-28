@@ -6,6 +6,8 @@ import Exceptions.LivroIndisponivelException;
 import Exceptions.LivroNaoEncontradoException;
 import Exceptions.PrazoAtrasadoException;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,19 +89,26 @@ public class Biblioteca {
         }
         
         if (LivroDesejado != null && LivroDesejado.getDisponivel()){
-            System.out.println("Você deseja reservar o livro " + LivroDesejado);
+            System.out.println("Você deseja reservar o livro " + LivroDesejado + "(Sim/Nao)");
             escolha = ler.nextLine().trim();
 
             if (escolha.equalsIgnoreCase("Sim")){
                 LivroDesejado.setDisponivel(false);
 
+                LocalDateTime agora = LocalDateTime.now();
+                LivroDesejado.setDataReserva(agora);
+
                 if (showF != null) {
-                    int prazoEntF = 14;
-                    System.out.println(showF.getNome() + " reserva " + LivroDesejado.getTitulo() + " por " + prazoEntF + " dias.");
+                    int prazoEntF = 6;
+                    LocalDateTime prazoMinF = agora.plusMinutes(prazoEntF);
+                    LivroDesejado.setPrazoEnt(prazoMinF);
+                    System.out.println(showF.getNome() + " reserva " + LivroDesejado.getTitulo() + " por " + prazoEntF + " minutos.");
                 }
                 else if (showU != null) {
-                    int prazoEntU = 7;
-                    System.out.println(showU.getNome() + " reserva " + LivroDesejado.getTitulo() + " por " + prazoEntU + " dias.");
+                    int prazoEntU = 3;
+                    LocalDateTime prazoMinU = agora.plusMinutes(prazoEntU);
+                    LivroDesejado.setPrazoEnt(prazoMinU);
+                    System.out.println(showU.getNome() + " reserva " + LivroDesejado.getTitulo() + " por " + prazoEntU + " minutos.");
                 }
                 
             }
@@ -108,7 +117,7 @@ public class Biblioteca {
             }
         }
         else{
-            throw new LivroIndisponivelException("O livro" + LivroDesejado.getTitulo() + "não disponível para reserva!");
+            throw new LivroIndisponivelException("O livro " + LivroDesejado.getTitulo() + " não disponível para reserva!");
         }
         
     }
@@ -169,18 +178,29 @@ public class Biblioteca {
          }
         
          if (livros.contains(LivroDesejado) && !LivroDesejado.getDisponivel()){
-            if (showF != null) {
-                System.out.println(showF.getNome() + " devolve o " + LivroDesejado.getTitulo() + "!");
-            LivroDesejado.setDisponivel(true);
+            LocalDateTime agoraD = LocalDateTime.now();
+            long atrasado = ChronoUnit.MINUTES.between(LivroDesejado.getPrazoEnt(), agoraD);
+
+            if(atrasado > 0){
+                throw new PrazoAtrasadoException("O prazo para a entrega do "+ LivroDesejado.getTitulo() + " está atrasado!\nEntre em contato com um administrador!");
             }
-            else if(showU != null){
-                System.out.println(showU.getNome() + " devolve o " + LivroDesejado.getTitulo() + "!");
+            else{
+                if (showF != null) {
+                    System.out.println(showF.getNome() + " devolve o " + LivroDesejado.getTitulo() + "!");
                 LivroDesejado.setDisponivel(true);
+                }
+                else if(showU != null){
+                    System.out.println(showU.getNome() + " devolve o " + LivroDesejado.getTitulo() + "!");
+                    LivroDesejado.setDisponivel(true);
+                }
             }
         }
         else{
             throw new LivroDisponivelException("Você esta tentando devolver um livro que não foi reservado!");
-        }
+        } 
+            
+            
+        
 
     }
 
@@ -241,7 +261,4 @@ public class Biblioteca {
         }
     }
 
-    public void GestaoPrazo(){
-        
-    }
 }

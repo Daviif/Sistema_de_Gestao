@@ -1,4 +1,5 @@
 
+import java.time.LocalDateTime;
 import java.util.Scanner;
 public class Livro {
     Scanner ler = new Scanner(System.in);
@@ -6,6 +7,8 @@ public class Livro {
     private String titulo;
     private String autor;
     private boolean disponivel = true;
+    private LocalDateTime dataReserva = null;
+    private LocalDateTime prazoEnt = null;
 
     public Livro(String titulo, String autor, boolean disponivel){
         this.titulo = titulo;
@@ -23,6 +26,22 @@ public class Livro {
 
     public boolean getDisponivel(){
         return disponivel;
+    }
+
+    public LocalDateTime getDataReserva(){
+        return dataReserva;
+    }
+
+    public void setDataReserva(LocalDateTime dataReserva){
+        this.dataReserva = dataReserva;
+    }
+
+    public LocalDateTime getPrazoEnt(){
+        return prazoEnt;
+    }
+
+    public void setPrazoEnt(LocalDateTime prazoEnt){
+        this.prazoEnt = prazoEnt;
     }
 
     public void setDisponivel(boolean disponivel){
